@@ -1,43 +1,44 @@
 # Roblox-notify-tracker
-Roblox Status Monitor is a Python script tracking online status changes of specified Roblox users. It uses Roblox API to fetch user presence and display names, sending desktop notifications via plyer library upon status updates. Ensure secure use of your Roblox authentication cookie
+
+Roblox Status Monitor is a Python script designed to track the online status changes of specified Roblox users. It utilizes the Roblox API to fetch user presence and display names, sending desktop notifications via the `plyer` library upon status updates. Ensure secure handling of your Roblox authentication cookie.
 
 ### Roblox Status Monitor
 
 **Overview:**
-The Roblox Status Monitor is a Python script designed to monitor the online status changes of specified Roblox users and send desktop notifications when changes occur. It utilizes Roblox's API endpoints to fetch user presence data and user display names, and uses the `plyer` library for notifications.
+The Roblox Status Monitor is a Python script that monitors changes in the online status of selected Roblox users and sends desktop notifications when changes occur. It interacts with Roblox's API endpoints to retrieve real-time presence data and display names, and leverages the `plyer` library for notification delivery.
 
 **Features:**
 
 1. **User Presence Monitoring:**
-   - The program continuously checks the presence status (online location) of selected Roblox users.
-   - It queries the Roblox API to retrieve real-time data about user presence.
+   - Continuously checks the online status (presence) of specified Roblox users.
+   - Uses Roblox API to fetch real-time presence information.
 
 2. **Status Change Detection:**
-   - Tracks changes in the online location (presence status) of each monitored user.
-   - Compares the current status with the last known status to detect updates.
+   - Tracks changes in the online status (presence) of each monitored user.
+   - Compares current status with previous status to detect updates.
 
 3. **Notification System:**
-   - Generates desktop notifications using `plyer` to inform the user when a monitored user's status changes.
-   - Each notification includes the user's display name, the new status, and the time of the update.
+   - Sends desktop notifications using `plyer` library upon detecting a status change.
+   - Notifications include user's display name, new status, and time of the update.
 
 4. **Robust Error Handling:**
-   - Implements error handling for HTTP requests to manage potential network issues or API errors gracefully.
+   - Implements error handling for HTTP requests to manage network issues or API errors gracefully.
    - Logs errors to provide visibility into failed API requests or other issues.
 
 5. **Customizable Configuration:**
-   - Allows users to specify their own Roblox authentication cookie (`roblox_cookie`) to access the necessary API endpoints securely.
-   - Users can define the list of Roblox user IDs (`user_ids`) they wish to monitor.
+   - Allows customization of Roblox authentication cookie (`roblox_cookie`) for secure API access.
+   - Users can define the list of Roblox user IDs (`user_ids`) they want to monitor.
 
 **Usage:**
-- **Setup:** Replace the placeholder `roblox_cookie` with your own Roblox authentication cookie. Ensure the cookie is kept secure and not shared publicly.
-- **Execution:** Run the script, and it will start monitoring the specified Roblox users.
-- **Notifications:** Whenever a change in status is detected (e.g., user goes offline or changes location), a desktop notification will be displayed.
+- **Setup:** Replace the placeholder `roblox_cookie` with your Roblox authentication cookie at **line 56**. Keep the cookie secure and private.
+- **Execution:** Run the script to start monitoring specified Roblox users. Configure user IDs at **line 58**.
+- **Notifications:** Desktop notifications are generated upon status changes (e.g., user goes offline or changes location).
 
 **Security Note:**
-- It's crucial to keep your Roblox authentication cookie (`roblox_cookie`) confidential and not share it publicly or in unsecured environments.
+- Ensure your Roblox authentication cookie (`roblox_cookie`) remains confidential and is not shared publicly or stored insecurely.
 
 **Compatibility:**
-- The program is designed to work on various platforms that support Python and `plyer` for notifications, including Windows, macOS, and Linux.
+- Compatible with platforms supporting Python and `plyer` for notifications, including Windows, macOS, and Linux.
 
 **Disclaimer:**
-This script is intended for personal use and educational purposes to demonstrate API interaction and notification systems. Ensure compliance with Roblox's terms of service and API usage policies when using such scripts.
+This script is for personal and educational purposes to demonstrate API interaction and notification systems. Comply with Roblox's terms of service and API usage policies when using such scripts.
