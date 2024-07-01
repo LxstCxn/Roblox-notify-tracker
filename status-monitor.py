@@ -3,8 +3,33 @@ import time
 from datetime import datetime
 from plyer import notification
 import logging
+import json
 
 logging.basicConfig(level=logging.INFO)  # Logging configuration
+
+def config():
+    with open("config.json", "r") as file:
+        return json.load(file)
+    
+def check_config():
+    required_keys = ["roblox_cookie", "user_ids", "interval"]
+    config_keys = config().keys()
+
+    for key in required_keys:
+        if key not in config_keys:
+            logging.error(f"Missing required key in config: {key}")
+            return False
+        
+        if not config()[key]:
+            logging.error(f"Value for key {key} is empty")
+            return False
+    
+    if not config()["interval"] >= 1:
+        logging.error("Interval value must be greater than 1")
+        return False
+    
+    return True
+
 
 # Function to fetch user presences
 def get_user_presences(user_ids, roblox_cookie):
@@ -53,9 +78,14 @@ def send_notification(display_name, new_status):
 
 # Example usage with status change detection
 if __name__ == "__main__":
-    roblox_cookie = ""  # Replace with your Roblox session cookie value
+    if not check_config():
+        logging.error("Config check failed. Please check the config file and try again.")
+        exit()
 
-    user_ids = []  # Replace with Roblox user IDs you want to monitor
+    roblox_cookie = config()["roblox_cookie"]
+    user_ids = config()["user_ids"]
+    interval = config()["interval"]
+
     last_known_statuses = {user_id: None for user_id in user_ids}
 
     while True:
@@ -73,4 +103,4 @@ if __name__ == "__main__":
                     if display_name:
                         send_notification(display_name, last_location)
 
-        time.sleep(60)
+        time.sleep(interval*60)
