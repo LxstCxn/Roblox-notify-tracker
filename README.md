@@ -1,11 +1,11 @@
 # Roblox-notify-tracker
 
-Roblox Status Monitor is a Python script designed to track the online status changes of specified Roblox users. It utilizes the Roblox API to fetch user presence and display names, sending desktop notifications via the `plyer` library upon status updates. Ensure secure handling of your Roblox authentication cookie.
+Roblox Status Monitor is a Python script designed to track the online status changes of your Roblox friends. It utilizes the Roblox API to fetch your friend list, their current presence and display names, sending desktop notifications via the `plyer` library upon status updates. Ensure secure handling of your Roblox authentication cookie.
 
 ### Roblox Status Monitor
 
 **Overview:**
-The Roblox Status Monitor is a Python script that monitors changes in the online status of selected Roblox users and sends desktop notifications when changes occur. It interacts with Roblox's API endpoints to retrieve real-time presence data and display names, and leverages the `plyer` library for notification delivery.
+The Roblox Status Monitor is a Python script that monitors changes in the online status of your Roblox Friends and sends desktop notifications when changes occur. It interacts with Roblox's API endpoints to retrieve real-time presence data and display names, and leverages the `plyer` library for notification delivery.
 
 **Features:**
 
@@ -31,17 +31,15 @@ The Roblox Status Monitor is a Python script that monitors changes in the online
 
 5. **Customizable Configuration:**
    - Allows configuration via a `config.json` file, enhancing security and ease of setup.
-   - Parameters include `roblox_cookie` for authentication and `user_ids` for specifying users to monitor.
    - You can set the length of time between each status check with `interval`.
 
 **Usage:**
 
-- **Setup:** Update the `config.json` file with your Roblox authentication cookie (`roblox_cookie`) and list of Roblox user IDs (`user_ids`). Here an exemple.
+- **Setup:** Update the `config.json` file with your Roblox authentication cookie `roblox_cookie` and the `interval`. Here an exemple.
   ```json
   {
     "roblox_cookie": "your_roblox_session_cookie_here",
-    "user_ids": ["123456789", "987654321"],
-    "interval": 1 // Need to be at least 1
+    "interval": 60 // Need to be at least 1 (in seconds)
   }
   ```
 - **Notifications:**
