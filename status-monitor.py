@@ -1,21 +1,33 @@
-import requests
-import time
-from datetime import datetime
 from plyer import notification
+from datetime import datetime
+import requests
 import logging
+import json
+import time
+
+config = json.load(open("config.json", 'r'))
+keys = list(config.keys())
+
+# Verify config
+if "RBX_COOKIE" not in keys: exit("RBX_COOKIE is not in config file")
+if config["RBX_COOKIE"] == "": exit("You must set a RBX_COOKIE")
+
+if "UIDs" not in keys: exit("UIDs is not in config file")
+if config["UIDs"] == []: exit("You add at least one ID to UIDs")
+
+if "UPDATE_RATE" not in keys: exit("UPDATE_RATE is not in config file")
+if not config["UPDATE_RATE"].isnumeric(): exit("UPDATE_RATE is not a numeric")
 
 logging.basicConfig(level=logging.INFO)  # Logging configuration
 
 # Function to fetch user presences
-def get_user_presences(user_ids, roblox_cookie):
+def get_user_presences(user_ids):
     url = "https://presence.roblox.com/v1/presence/users"
     headers = {
         "Content-Type": "application/json",
-        "Cookie": f".ROBLOSECURITY={roblox_cookie}"
+        "Cookie": config["RBX_COOKIE"]
     }
-    data = {
-        "userIds": user_ids
-    }
+    data = {"userIds": user_ids}
 
     try:
         response = requests.post(url, json=data, headers=headers)
@@ -26,11 +38,9 @@ def get_user_presences(user_ids, roblox_cookie):
         return None
 
 # Function to fetch user display name
-def get_user_display_name(user_id, roblox_cookie):
+def get_user_display_name(user_id):
     url = f"https://users.roblox.com/v1/users/{user_id}"
-    headers = {
-        "Cookie": f".ROBLOSECURITY={roblox_cookie}"
-    }
+    headers = {"Cookie": config["RBX_COOKIE"]}
 
     try:
         response = requests.get(url, headers=headers)
@@ -53,13 +63,10 @@ def send_notification(display_name, new_status):
 
 # Example usage with status change detection
 if __name__ == "__main__":
-    roblox_cookie = ""  # Replace with your Roblox session cookie value
-
-    user_ids = []  # Replace with Roblox user IDs you want to monitor
-    last_known_statuses = {user_id: None for user_id in user_ids}
+    last_known_statuses = {user_id: None for user_id in config["UIDs"]}
 
     while True:
-        user_presences = get_user_presences(user_ids, roblox_cookie)
+        user_presences = get_user_presences(config["UIDs"])
 
         if user_presences:
             for presence in user_presences:
@@ -68,9 +75,9 @@ if __name__ == "__main__":
 
                 if last_known_statuses[user_id] != last_location:
                     last_known_statuses[user_id] = last_location
-                    display_name = get_user_display_name(user_id, roblox_cookie)
+                    display_name = get_user_display_name(user_id)
 
                     if display_name:
                         send_notification(display_name, last_location)
 
-        time.sleep(60)
+        time.sleep(config["UPDATE_RATE"])
