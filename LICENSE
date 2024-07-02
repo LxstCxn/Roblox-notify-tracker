@@ -1,19 +1,13 @@
+MIT License
+
 Copyright (c) 2024 Lxst_
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to use
-the Software solely for personal purposes, subject to the following conditions:
-
-Restrictions:
-
-Copying: No permission is granted to copy the Software, in whole or in part.
-Modification and Derivative Works: No permission is granted to modify the Software or create derivative works based on the Software.
-Distribution: No permission is granted to distribute or republish the Software, in whole or in part, including any modifications or derivative works.
-Exclusive Rights:
-The owner of the Software, Lxst_, and collaborators retains the exclusive rights to copy, modify, distribute, and republish the Software, including any modifications or derivative works.
-
-License Modifications:
-The owner and collaborators of the Software reserve the right to modify this license at any time. Any modifications to the license will be communicated to all users of the Software.
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
